@@ -1,3 +1,4 @@
+import { IDocumento } from './../../services/documentos.service';
 import { EstudiantesService, Estudiante } from './../../services/estudiantes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -19,6 +20,7 @@ export class EstudiantesPage implements OnInit {
     telefono: '',
     celular: '',
     fechaCreacion: 0,
+    documentos: new Array<IDocumento>(),
   };
 
   estudianteCodigo: string = null;

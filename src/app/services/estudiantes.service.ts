@@ -1,3 +1,4 @@
+import { IDocumento } from './documentos.service';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -12,6 +13,7 @@ export interface Estudiante {
   telefono: string;
   celular: string;
   fechaCreacion: number;
+  documentos: IDocumento[];
 }
 
 @Injectable({

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{estudiante.codigo}}</ion-card-subtitle>
+      <ion-card-title>{{estudiante.nombre}} {{estudiante.apellido}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Tel: {{estudiante.telefono}}</p>
+      <p>Cel: {{estudiante.celular}}</p>
+      <p>{{estudiante.email}}</p>
+      <p><small>{{estudiante.fechaCreacion | date :'short'}}</small></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-item href="#" class="activated" *ngFor="let documento of estudiante.documentos">
+      <ion-icon name="wifi" slot="start"></ion-icon>
+      <ion-label>{{documento.descripcion}}</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="options"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button color="success" (click)="openModal($event)">
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="warning" (click)="edit()">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger" (click)="remove()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
