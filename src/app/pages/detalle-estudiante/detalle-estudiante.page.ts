@@ -1,9 +1,9 @@
-import { PopOverPage } from './../pop-over/pop-over.page';
+import { VentaModalPage } from './../venta-modal/venta-modal.page';
 import { Component, OnInit } from '@angular/core';
 import { Estudiante, EstudiantesService } from 'src/app/services/estudiantes.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
-import { IDocumento } from 'src/app/services/documentos.service';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { IDocumento, DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
   selector: 'app-detalle-estudiante',
@@ -24,13 +24,17 @@ export class DetalleEstudiantePage implements OnInit {
     documentos: new Array<IDocumento>()
   };
 
+  documentosEstudiante: IDocumento[];
   estudianteCodigo: string = null;
   constructor(private estudianteService: EstudiantesService,
+    private documentosService: DocumentosService,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
     private nav: NavController,
     private _router: Router,
-    private popOverController: PopoverController) { }
+    private modalController: ModalController) {
+    this.documentosEstudiante = new Array<IDocumento>();
+  }
 
   ngOnInit() {
     this.estudianteCodigo = this.route.snapshot.params['id'];
@@ -52,6 +56,17 @@ export class DetalleEstudiantePage implements OnInit {
     this.estudianteService.getEstudiante(this.estudianteCodigo).subscribe(res => {
       loading.dismiss();
       this.estudiante = <Estudiante>res;
+      this.documentosEstudiante = new Array<IDocumento>();
+
+      this.documentosService.getDocumentos().subscribe(result => {
+        result.forEach(doc => {
+          const estado = this.estudiante.documentos.filter(s => s.descripcion == (<IDocumento>doc).descripcion);
+          if (estado.length == 0) {
+            this.documentosEstudiante.push(doc);
+          }
+        });
+      });
+
     });
   }
 
@@ -65,15 +80,14 @@ export class DetalleEstudiantePage implements OnInit {
     this._router.navigate(['/estudiantes', this.estudianteCodigo]);
   }
 
-  async openModal(ev: Event) {
-    const popover = await this.popOverController.create({
-      component: PopOverPage,
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: VentaModalPage,
       componentProps: {
         estudianteCodigo: this.estudianteCodigo
       },
-      event: ev
     });
 
-    popover.present();
+    await modal.present();
   }
 }

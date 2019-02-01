@@ -1,3 +1,4 @@
+import { VentaModalPageModule } from './pages/venta-modal/venta-modal.module';
 import { PopOverPageModule } from './pages/pop-over/pop-over.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,7 +25,8 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    PopOverPageModule
+    PopOverPageModule,
+    VentaModalPageModule
   ],
   providers: [
     StatusBar,

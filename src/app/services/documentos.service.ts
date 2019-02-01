@@ -34,7 +34,20 @@ export class DocumentosService {
     );
   }
 
-  getDocumentos = () => this.documentos;
+  getDocumentos() {
+    this.documentos = this.documentosCollection.snapshotChanges().pipe(
+      map(action => {
+        return action.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+
+    return this.documentos;
+  }
+
   getDocumento = (id: string) => this.documentosCollection.doc(id).valueChanges();
   updateDocumento = (documento: IDocumento, id: string) => this.documentosCollection.doc(id).update(documento);
   addDocumento = (documento: IDocumento) => this.documentosCollection.add(documento);

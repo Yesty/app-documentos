@@ -23,7 +23,7 @@
 
   <ion-list>
     <ion-item-sliding *ngFor='let item of estudiantes'>
-      <ion-item lines='inset' button [routerLink]="['/detalle-estudiante',item.id]">
+      <ion-item button [routerLink]="['/detalle-estudiante',item.id]">
         <ion-label>
           {{item.nombre}} {{item.apellido}}
           <p>{{item.codigo}}</p>

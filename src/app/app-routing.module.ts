@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'documentos', loadChildren: './pages/documentos/documentos.module#DocumentosPageModule' },
   { path: 'detalle-documento', loadChildren: './pages/detalle-documento/detalle-documento.module#DetalleDocumentoPageModule' },
   { path: 'detalle-documento/:id', loadChildren: './pages/detalle-documento/detalle-documento.module#DetalleDocumentoPageModule' },
-  { path: 'pop-over', loadChildren: './pages/pop-over/pop-over.module#PopOverPageModule' }
+  { path: 'pop-over', loadChildren: './pages/pop-over/pop-over.module#PopOverPageModule' },
+  { path: 'venta-modal', loadChildren: './pages/venta-modal/venta-modal.module#VentaModalPageModule' }
 ];
 
 @NgModule({

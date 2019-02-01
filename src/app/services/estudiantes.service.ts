@@ -39,7 +39,20 @@ export class EstudiantesService {
     );
   }
 
-  getEstudiantes = () => this.estudiantes;
+  getEstudiantes() {
+    this.estudiantes = this.estudiantesCollection.snapshotChanges().pipe(
+      map(action => {
+        return action.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+
+    return this.estudiantes;
+  }
+
   getEstudiante = (id: string) => this.estudiantesCollection.doc(id).valueChanges();
   updateEstudiante = (estudiante: Estudiante, id: string) => this.estudiantesCollection.doc(id).update(estudiante);
   addEstudiante = (estudiante: Estudiante) => this.estudiantesCollection.add(estudiante);
