@@ -1,11 +1,12 @@
-import { VentaModalPageModule } from './pages/venta-modal/venta-modal.module';
-import { PopOverPageModule } from './pages/pop-over/pop-over.module';
+import { AuthGuardService } from './services/auth-guard.service';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { VentaModalPageModule } from './dashboard/venta-modal/venta-modal.module';
+import { PopOverPageModule } from './dashboard/pop-over/pop-over.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +28,8 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     PopOverPageModule,
-    VentaModalPageModule
+    VentaModalPageModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
@@ -35,4 +38,4 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

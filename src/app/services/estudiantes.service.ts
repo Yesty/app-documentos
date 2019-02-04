@@ -53,6 +53,10 @@ export class EstudiantesService {
     return this.estudiantes;
   }
 
+  getLogin(codigo: string, documento: string) {
+    return this.db.collection<Estudiante>('estudiantes', ref => ref.where('codigo', '==', codigo).where('documento', '==', documento));
+  }
+
   getEstudiante = (id: string) => this.estudiantesCollection.doc(id).valueChanges();
   updateEstudiante = (estudiante: Estudiante, id: string) => this.estudiantesCollection.doc(id).update(estudiante);
   addEstudiante = (estudiante: Estudiante) => this.estudiantesCollection.add(estudiante);

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/dashboard/documentos"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Documento</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input required type="number" placeholder="Código" [(ngModel)]="documento.codigo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input required type="text" placeholder="Descripcion" [(ngModel)]="documento.descripcion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input required type="text" placeholder="Tipo" [(ngModel)]="documento.tipo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="documento.estado"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  
+    <ion-button expand="full" (click)="saveDocumento()">Guardar</ion-button>
+  </ion-content>
+  

@@ -4,15 +4,16 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Inicio
+      Documentos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar autocomplete="on" placeholder="Buscar" (ionChange)="sharedItem(buscarTexto.value)" (ionCancel)="reloadItem()" #buscarTexto></ion-searchbar>
+  <ion-searchbar autocomplete="on" placeholder="Buscar" (ionChange)="sharedItem(buscarTexto.value)" (ionClear)="reloadItem()"
+    #buscarTexto></ion-searchbar>
 
-  <ng-container *ngIf="!estudiantes || estudiantes.length == 0">
+  <ng-container *ngIf="!documentos || documentos.length == 0">
     <div *ngFor="let n of [0,1,2]" padding>
       <ion-skeleton-text></ion-skeleton-text>
       <p>
@@ -22,10 +23,10 @@
   </ng-container>
 
   <ion-list>
-    <ion-item-sliding *ngFor='let item of estudiantes'>
-      <ion-item button [routerLink]="['/dashboard','detalle-estudiante',item.id]">
+    <ion-item-sliding *ngFor='let item of documentos'>
+      <ion-item button [routerLink]="['/dashboard','detalle-documento',item.id]">
         <ion-label>
-          {{item.nombre}} {{item.apellido}}
+          {{item.descripcion}}
           <p>{{item.codigo}}</p>
         </ion-label>
         <ion-note slot='end' color='primary'>{{item.fechaCreacion | date:'short'}}</ion-note>
@@ -42,8 +43,8 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/dashboard/estudiantes" routerDirection="forward">
-      <ion-icon name="person-add"></ion-icon>
+    <ion-fab-button routerLink="/dashboard/detalle-documento" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

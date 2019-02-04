@@ -1,7 +1,6 @@
-import { EstudiantesService } from './../services/estudiantes.service';
 import { Component, OnInit } from '@angular/core';
-import { Estudiante } from '../services/estudiantes.service';
 import { Router } from '@angular/router';
+import { EstudiantesService } from '../services/estudiantes.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +11,9 @@ export class HomePage implements OnInit {
 
   estudiantes: any[];
 
-  constructor(private estudianteServices: EstudiantesService, private _router: Router) {
+  constructor(
+    private estudianteServices: EstudiantesService,
+    private _router: Router) {
     this.estudianteServices.getEstudiantes().subscribe(res => {
       this.estudiantes = res;
     });
@@ -28,15 +29,20 @@ export class HomePage implements OnInit {
 
   // Métodos
   edit(item) {
-    this._router.navigate(['/estudiantes', item.id]);
+    this._router.navigate(['/dashboard', 'estudiantes', item.id]);
   }
 
   sharedItem(termino: string) {
-    console.log(this.estudiantes);
+    this.estudianteServices.getEstudiantes().subscribe(res => {
+      this.estudiantes = res.filter(s => !s.nombre.toLowerCase().indexOf(termino.toLowerCase()));
+    });
+
+    if (termino == '') {
+      this.reloadItem();
+    }
   }
 
   reloadItem() {
-    console.log('limpia');
     this.estudianteServices.getEstudiantes().subscribe(res => {
       this.estudiantes = res;
     });

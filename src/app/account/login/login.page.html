@@ -1,0 +1,21 @@
+<ion-content padding>
+  <ion-card class="sc-ion-card-ios-h sc-ion-card-ios-s hydrated"><img src="../../../assets/img/logo.jpg">
+    <ion-card-header class="hydrated">
+        <ion-card-title role="heading" aria-level="2" class="hydrated">Consulta</ion-card-title>
+      <ion-card-subtitle role="heading" aria-level="3" class="hydrated">Documentos de estudiante</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="card-content card-content-ios hydrated">
+      <ion-list lines="full">
+        <ion-item>
+          <ion-input required type="number" placeholder="Código" [(ngModel)]="codigoEstudiante"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input required type="number" placeholder="Documento" [(ngModel)]="documentoEstudiante"></ion-input>
+        </ion-item>
+
+        <ion-button color='primary' shape="round" expand="block" (click)="login()" > Iniciar sesión </ion-button>
+        <!-- <ion-button color='secondary' shape="round" expand="block" href="/register" routerDirection="forward"> Registrate </ion-button> -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
